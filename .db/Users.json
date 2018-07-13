@@ -1,0 +1,80 @@
+[
+  [
+    {
+      "USE_ID": 1,
+      "USE_USERNAME": "sa",
+      "USE_PASSWORD": "123",
+      "USE_DISPLAY_NAME": "Sys Admin",
+      "USE_LAST_LOGIN_DATE": null,
+      "USE_CREATED_DATE": "2018-03-23T04:00:00.000Z",
+      "USE_LAST_CHANGED_DATE": "2018-03-23T04:00:00.000Z",
+      "USE_STATUS": "Active",
+      "USE_STATUS_DATE": "2018-03-23T04:00:00.000Z"
+    },
+    {
+      "USE_ID": 2,
+      "USE_USERNAME": "pmathur",
+      "USE_PASSWORD": "123",
+      "USE_DISPLAY_NAME": "Poonam Mathur",
+      "USE_LAST_LOGIN_DATE": null,
+      "USE_CREATED_DATE": "2018-03-23T04:00:00.000Z",
+      "USE_LAST_CHANGED_DATE": "2018-03-23T04:00:00.000Z",
+      "USE_STATUS": "Active",
+      "USE_STATUS_DATE": "2018-03-23T04:00:00.000Z"
+    },
+    {
+      "USE_ID": 3,
+      "USE_USERNAME": "aabutaleb",
+      "USE_PASSWORD": "123",
+      "USE_DISPLAY_NAME": "Ameer Abutaleb",
+      "USE_LAST_LOGIN_DATE": null,
+      "USE_CREATED_DATE": "2018-03-23T04:00:00.000Z",
+      "USE_LAST_CHANGED_DATE": "2018-03-23T04:00:00.000Z",
+      "USE_STATUS": "Active",
+      "USE_STATUS_DATE": "2018-03-23T04:00:00.000Z"
+    },
+    {
+      "USE_ID": 4,
+      "USE_USERNAME": "hsmith",
+      "USE_PASSWORD": "123",
+      "USE_DISPLAY_NAME": "Howard Smith",
+      "USE_LAST_LOGIN_DATE": null,
+      "USE_CREATED_DATE": "2018-03-23T04:00:00.000Z",
+      "USE_LAST_CHANGED_DATE": "2018-03-23T04:00:00.000Z",
+      "USE_STATUS": "Active",
+      "USE_STATUS_DATE": "2018-03-23T04:00:00.000Z"
+    },
+    {
+      "USE_ID": 5,
+      "USE_USERNAME": "skottilil",
+      "USE_PASSWORD": "123",
+      "USE_DISPLAY_NAME": "Shyam Kottilil",
+      "USE_LAST_LOGIN_DATE": null,
+      "USE_CREATED_DATE": "2018-03-23T04:00:00.000Z",
+      "USE_LAST_CHANGED_DATE": "2018-03-23T04:00:00.000Z",
+      "USE_STATUS": "Active",
+      "USE_STATUS_DATE": "2018-03-23T04:00:00.000Z"
+    },
+    {
+      "USE_ID": 6,
+      "USE_USERNAME": "nmercer",
+      "USE_PASSWORD": "123",
+      "USE_DISPLAY_NAME": "Natalia Mercer",
+      "USE_LAST_LOGIN_DATE": null,
+      "USE_CREATED_DATE": "2018-03-23T04:00:00.000Z",
+      "USE_LAST_CHANGED_DATE": "2018-03-23T04:00:00.000Z",
+      "USE_STATUS": "Active",
+      "USE_STATUS_DATE": "2018-03-23T04:00:00.000Z"
+    }
+  ],
+  {
+    "fieldCount": 0,
+    "affectedRows": 0,
+    "insertId": 0,
+    "serverStatus": 34,
+    "warningCount": 0,
+    "message": "",
+    "protocol41": true,
+    "changedRows": 0
+  }
+]
