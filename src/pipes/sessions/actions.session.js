@@ -11,8 +11,8 @@ import schema                             from './schema.session';
 
 const Actions = {
   setCurrentUser: (dispatch, user) => {
-    const socket = new Socket('ws://10.0.2.2:4000/socket', {
-    //const socket = new Socket('ws://localhost:4000/socket', {
+    //const socket = new Socket('ws://10.0.2.2:4000/socket', {
+    const socket = new Socket('ws://localhost:4000/socket', {
         params: { token: localStorage.getItem('phoenixAuthToken') },
       logger: (kind, msg, data) => { console.log(`${kind}: ${msg}`, data);
       },

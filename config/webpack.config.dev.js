@@ -145,7 +145,6 @@ module.exports = {
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
             options: {
-              
               compact: true,
             },
           },
@@ -155,6 +154,12 @@ module.exports = {
             test: /\.(ts|tsx)$/,
             include: paths.appSrc,
             use: [
+              {
+                loader: require.resolve('babel-loader'),
+                options: {
+                  compact: true,
+                },
+              },
               {
                 loader: require.resolve('ts-loader'),
                 options: {

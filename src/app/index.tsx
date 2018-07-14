@@ -6,8 +6,8 @@ import { Provider } 															from 'react-redux'
 import thunkMiddleware 														from 'redux-thunk';
 import { createLogger } 													from 'redux-logger';
 import { ConnectedRouter, routerMiddleware } 			from 'react-router-redux'
-//import createHistory 															from 'history/createBrowserHistory'
-import createHistory 															from 'history/createHashHistory'
+import createHistory 															from 'history/createBrowserHistory'
+//import createHistory 															from 'history/createHashHistory'
 
 import reducers 																	from '../pipes/reducers'
 import Routes 																		from '../components/Routes';

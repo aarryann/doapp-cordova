@@ -1,8 +1,8 @@
 import { graphql }   from 'graphql';
 import { httpPost, httpGet }  from '../utils';
 
-const remoteBaseUrl = "http://10.0.2.2:4000/";
-//const remoteBaseUrl = "http://localhost:4000/";
+//const remoteBaseUrl = "http://10.0.2.2:4000/";
+const remoteBaseUrl = "http://localhost:4000/";
 export const apiCall = async ( resource, payload, source ) => {
   try{
     // If cordova mode
