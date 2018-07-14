@@ -1,7 +1,7 @@
-import React 																			from 'react';
-import ReactDOM 																	from 'react-dom';
+import * as React 																from 'react';
+import * as ReactDOM 															from 'react-dom';
 
-import { createStore, applyMiddleware, compose } 	from 'redux'
+import { createStore, applyMiddleware, compose, Middleware } 	from 'redux'
 import { Provider } 															from 'react-redux'
 import thunkMiddleware 														from 'redux-thunk';
 import { createLogger } 													from 'redux-logger';
@@ -18,7 +18,7 @@ import { loadDB }																	from '../services/utils/mobile.db.utils';
 const history = createHistory()
 const initialState = {};
 const enhancers = [];
-const middlewares = [
+const middlewares: Middleware[] = [
 	thunkMiddleware,
 ];
 
@@ -29,7 +29,7 @@ if (process.env.NODE_ENV !== 'development'){
 	})
 
 	middlewares.push(loggerMiddleware);
-	const devToolsExtension = window.devToolsExtension;
+	const devToolsExtension = window['devToolsExtension'];
 
 	if (typeof devToolsExtension === 'function'){
 		enhancers.push(devToolsExtension());
@@ -59,15 +59,14 @@ const startApp = () => {
 	);
 }
 
-const startMobileApp = async (dbName) => {
+const startMobileApp = async (dbName: string) => {
   await waitForDeviceReady();
-//  await refreshDB('doapp.db');
-  loadDB('doapp.db');
+  loadDB(dbName);
   startApp();
 }
 
-if (window.cordova){
-  startMobileApp();
+if (window['cordova']){
+  startMobileApp('doapp.db');
 } else {
   startApp();
 	registerServiceWorker();
