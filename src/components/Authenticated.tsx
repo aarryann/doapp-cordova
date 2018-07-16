@@ -7,14 +7,14 @@ import { RouteComponentProps, withRouter, Route } 	from 'react-router-dom';
 import IState 					from '../pipes/sessions/ISessionState';
 import Actions 					from '../pipes/sessions/actions.session';
 
-interface IAppProps extends RouteComponentProps<any> {
+interface IAuthProps extends RouteComponentProps<any> {
 	dispatch: Dispatch,
 	currentUser: string,
 	location: any
 }
 
-class AuthenticatedRoute extends React.Component<IAppProps>{
-	constructor(props: IAppProps) {
+class AuthenticatedRoute extends React.Component<IAuthProps>{
+	constructor(props: IAuthProps) {
 		super(props);
 	}	
 
@@ -22,12 +22,12 @@ class AuthenticatedRoute extends React.Component<IAppProps>{
 		this._checkAuth(this.props);
 	}
 
-	shouldComponentUpdate(nextProps: IAppProps, nextState: IState){
+	shouldComponentUpdate(nextProps: IAuthProps, nextState: IState){
 		const update = !this._signIn(nextProps);
 		return update;
 	}
 
-	_checkAuth(params: IAppProps){
+	_checkAuth(params: IAuthProps){
 		if (!this._signIn(params)){
 			const {dispatch, currentUser} = params;
 			if (!currentUser){
@@ -38,7 +38,7 @@ class AuthenticatedRoute extends React.Component<IAppProps>{
 		}
 	}
 
-	_signIn(params: IAppProps){
+	_signIn(params: IAuthProps){
 		const {dispatch, location} = params;
 		const phoenixAuthToken = localStorage.getItem('phoenixAuthToken');
 
@@ -63,4 +63,4 @@ const mapStateToProps = (state: IState) => ({
 	currentUser: state.session.currentUser,
 });
 
-export default withRouter(connect<{}, {}, IAppProps, IState>(mapStateToProps)(AuthenticatedRoute)) as React.ComponentClass<any> ;
+export default withRouter(connect<{}, {}, IAuthProps, IState>(mapStateToProps)(AuthenticatedRoute)) as React.ComponentClass<any> ;

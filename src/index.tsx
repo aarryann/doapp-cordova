@@ -11,10 +11,12 @@ import createHistory 															from 'history/createBrowserHistory'
 
 //import IStoreState																from './IStoreState';
 import reducers 																	from './pipes/reducers'
-import App 																				from './components/App';
+import App 																				from './app';
 import registerServiceWorker 											from './registerServiceWorker';
 import { waitForDeviceReady }											from './services/utils';
 import { loadDB }																	from './services/utils/mobile.db.utils';
+
+import './assets/css/index.css';
 
 const history = createHistory()
 const initialState = {};

@@ -5,7 +5,10 @@ import AuthenticatedRoute 				from './Authenticated';
 import SignIn 							from '../scenes/Session';
 import Boards 							from '../scenes/Board';
 
-class Routes extends React.Component<RouteComponentProps<any>>{
+interface IRouteProps extends RouteComponentProps<any> {
+  isAuthenticated: boolean;
+}
+class Routes extends React.Component<IRouteProps>{
 	render(){
 		return(
 			<Switch>
