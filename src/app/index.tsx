@@ -1,12 +1,10 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-//import { withRouter } from "react-router-dom";
-import Routes from "../components/Routes";
+import Routes from "./Routes";
 import IStoreState from "./IStoreState";
 
 interface IAppProps extends RouteComponentProps<any> {
-//interface IApProps{
   isAuthenticated: boolean;
 }
 
@@ -17,11 +15,11 @@ class App extends React.Component<IAppProps> {
 
   public render() {
     return (
-      <div>
-        <div className="container-fluid">
+			<React.Fragment>
+      	<div id="content-wrapper" className="main-container">
           <Routes isAuthenticated={this.props.isAuthenticated} />
         </div>
-      </div>
+			</React.Fragment>
     );
   }
 
