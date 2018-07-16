@@ -1,6 +1,6 @@
 import DB from './promised.db.js';
 //import 'babel-polyfill';
-import AppConstants from '../../pipes/app/constants.app';
+import AppConstants from '../../pipes/app/constants.app.js';
 
 window.SDATA = window.SDATA || {};
 

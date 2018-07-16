@@ -9,11 +9,12 @@ import { ConnectedRouter, routerMiddleware } 			from 'react-router-redux'
 import createHistory 															from 'history/createBrowserHistory'
 //import createHistory 															from 'history/createHashHistory'
 
-import reducers 																	from '../pipes/reducers'
-import Routes 																		from '../components/Routes';
+//import IStoreState																from './IStoreState';
+import reducers 																	from './pipes/reducers'
+import App 																				from './components/App';
 import registerServiceWorker 											from './registerServiceWorker';
-import { waitForDeviceReady }											from '../services/utils';
-import { loadDB }																	from '../services/utils/mobile.db.utils';
+import { waitForDeviceReady }											from './services/utils';
+import { loadDB }																	from './services/utils/mobile.db.utils';
 
 const history = createHistory()
 const initialState = {};
@@ -52,7 +53,7 @@ const startApp = () => {
 	  <Provider store={store}>
 	    { /* ConnectedRouter will use the store from Provider automatically */ }
 	    <ConnectedRouter history={history}>
-	  		<Routes />
+	  		<App />
 	    </ConnectedRouter>
 	  </Provider>,
 	  document.getElementById('main_container')
