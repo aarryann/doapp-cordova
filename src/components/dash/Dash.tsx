@@ -7,7 +7,7 @@ interface IDashProps {
   readonly currentLocation: string;
 }
 
-export default function Header({ ...rest }: IDashProps) {
+export default function Dash({ ...rest }: IDashProps) {
   return (
     <div>
         Dash

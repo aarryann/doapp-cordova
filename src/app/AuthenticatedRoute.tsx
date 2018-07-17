@@ -8,13 +8,17 @@ import {
 
 interface IAuthenticatedRouteProps extends RouteProps {
   readonly isAuthenticated: boolean;
+  readonly exact: boolean;
   readonly authenticatePath: string;
+  readonly path: string;
   readonly component: React.ComponentClass<any> | React.StatelessComponent<any>;
 }
 
 export default function AuthenticatedRoute({
   component,
+  exact,
   authenticatePath,
+  path,
   isAuthenticated,
   ...rest
 }: IAuthenticatedRouteProps) {
