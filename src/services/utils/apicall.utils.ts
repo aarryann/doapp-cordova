@@ -1,14 +1,20 @@
-import { graphql }   from 'graphql';
-import { httpPost, httpGet }  from '../utils';
+import { graphql, GraphQLSchema }   from 'graphql';
+import { httpPost, httpGet }  from '.';
 
+export interface IApiPayload{
+  schema: GraphQLSchema;
+  query: string;
+  db: any;
+  values: any;
+}
 //const remoteBaseUrl = "http://10.0.2.2:4000/";
 const remoteBaseUrl = "http://localhost:4000/";
-export const apiCall = async ( resource, payload, source ) => {
+export const apiCall = async ( resource: string, payload: IApiPayload, source: string ) => {
   try{
     // If cordova mode
     if (source === 'local'){
       //console.log("Graphql Local call");
-      const db = window.SDATA.conn;
+      const db = window['SDATA'].conn;
       // local graphql call: schema, query, rootQuery, context, variables
       return graphql( payload.schema, payload.query, null, {db}, payload.values );
     } else if (source === 'post'){
