@@ -1,11 +1,11 @@
-import React 					from 'react';
-import {Dispatch} 				from 'redux';
-import {connect}				from 'react-redux';
-import {routerActions} 			from 'react-router-redux';
-import { RouteComponentProps, withRouter, Route } 	from 'react-router-dom';
+import React from 'react';
+import {Dispatch} from 'redux';
+import {connect} from 'react-redux';
+import {routerActions} from 'react-router-redux';
+import { RouteComponentProps, withRouter, Route } from 'react-router-dom';
 
-import IState 					from '../pipes/sessions/ISessionState';
-import Actions 					from '../pipes/sessions/actions.session';
+import Actions from '../pipes/sessions/actions.session';
+import IStoreState from './IStoreState';
 
 interface IAuthProps extends RouteComponentProps<any> {
 	dispatch: Dispatch,
@@ -22,7 +22,7 @@ class AuthenticatedRoute extends React.Component<IAuthProps>{
 		this._checkAuth(this.props);
 	}
 
-	shouldComponentUpdate(nextProps: IAuthProps, nextState: IState){
+	shouldComponentUpdate(nextProps: IAuthProps, nextState: IStoreState){
 		const update = !this._signIn(nextProps);
 		return update;
 	}
@@ -59,8 +59,8 @@ class AuthenticatedRoute extends React.Component<IAuthProps>{
 	}
 }
 
-const mapStateToProps = (state: IState) => ({
+const mapStateToProps = (state: IStoreState) => ({
 	currentUser: state.session.currentUser,
 });
 
-export default withRouter(connect<{}, {}, IAuthProps, IState>(mapStateToProps)(AuthenticatedRoute)) as React.ComponentClass<any> ;
+export default withRouter(connect<{}, {}, IAuthProps, IStoreState>(mapStateToProps)(AuthenticatedRoute)) as React.ComponentClass<any> ;

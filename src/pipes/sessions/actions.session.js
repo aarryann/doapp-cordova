@@ -156,8 +156,7 @@ const Actions = {
   // ... the current user will need to be regenerated to put currentUser in store
   currentUser: () => {
     return dispatch => {
-      /*
-      httpGet('/api/v1/current_user')
+      apiCall('api/v1/current_user', null, 'get')
       .then(function (data) {
           dispatch({
             type: SessionConstants.CURRENT_USER,
@@ -169,7 +168,6 @@ const Actions = {
         console.log(error);
         dispatch(routerActions.push('/'));
       });
-      */
     };
   },
 

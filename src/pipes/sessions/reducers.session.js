@@ -1,6 +1,7 @@
 import Constants from './constants.session';
 
 const initialState = {
+  isAuthenticated: false,
   currentUser: null,
   socket: null,
   channel: null,
@@ -10,7 +11,7 @@ const initialState = {
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case Constants.CURRENT_USER:
-      return { ...state, currentUser: action.currentUser, socket: action.socket, channel: action.channel, error: null };
+      return { ...state, isAuthenticated: true, currentUser: action.currentUser, socket: action.socket, channel: action.channel, error: null };
 
     case Constants.USER_SIGNED_OUT:
       return initialState;

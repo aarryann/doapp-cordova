@@ -1,7 +1,8 @@
-import * as React from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import Routes from "./Routes";
+import Header from "../components/header/Header";
 import IStoreState from "./IStoreState";
 
 interface IAppProps extends RouteComponentProps<any> {
@@ -13,9 +14,19 @@ class App extends React.Component<IAppProps> {
     super(props);
   }
 
+  _renderHeader() {
+    const { isAuthenticated } = this.props;
+    if(!isAuthenticated) return false;
+
+    return (
+      <Header></Header>
+    );
+  }
+
   public render() {
     return (
 			<React.Fragment>
+        {this._renderHeader()}
       	<div id="content-wrapper" className="main-container">
           <Routes isAuthenticated={this.props.isAuthenticated} />
         </div>
@@ -27,7 +38,7 @@ class App extends React.Component<IAppProps> {
 
 function mapStateToProps(state: IStoreState) {
   return {
-    isAuthenticated: state.isAuthenticated,
+    isAuthenticated: state.session.isAuthenticated,
   };
 }
 

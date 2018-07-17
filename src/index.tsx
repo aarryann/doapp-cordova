@@ -1,20 +1,19 @@
-import * as React 																from 'react';
-import * as ReactDOM 															from 'react-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 import { createStore, applyMiddleware, compose, Middleware } 	from 'redux'
-import { Provider } 															from 'react-redux'
-import thunkMiddleware 														from 'redux-thunk';
-import { createLogger } 													from 'redux-logger';
-import { ConnectedRouter, routerMiddleware } 			from 'react-router-redux'
-import createHistory 															from 'history/createBrowserHistory'
-//import createHistory 															from 'history/createHashHistory'
+import { Provider } from 'react-redux'
+import thunkMiddleware from 'redux-thunk';
+import { createLogger } from 'redux-logger';
+import { ConnectedRouter, routerMiddleware } from 'react-router-redux'
+import createHistory from 'history/createBrowserHistory'
+//import createHistory from 'history/createHashHistory'
 
-//import IStoreState																from './IStoreState';
-import reducers 																	from './pipes/reducers'
-import App 																				from './app';
-import registerServiceWorker 											from './registerServiceWorker';
-import { waitForDeviceReady }											from './services/utils';
-import { loadDB }																	from './services/utils/mobile.db.utils';
+import reducers from './pipes/reducers'
+import App from './app/App';
+import registerServiceWorker from './registerServiceWorker';
+import { waitForDeviceReady }	from './services/utils';
+import { loadDB }	from './services/utils/mobile.db.utils';
 
 import './assets/css/index.css';
 
