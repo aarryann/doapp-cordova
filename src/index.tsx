@@ -16,16 +16,17 @@ import { waitForDeviceReady }	from './services/utils';
 import { loadDB }	from './services/utils/mobile.db.utils';
 
 import './assets/css/index.css';
+import IStoreState from './app/IStoreState';
 
 const history = createHistory()
-const initialState = {};
+const initialState: IStoreState = {};
 const enhancers = [];
 const middlewares: Middleware[] = [
 	thunkMiddleware,
 ];
 
 if (process.env.NODE_ENV !== 'development'){
-	const loggerMiddleware = createLogger({
+	const loggerMiddleware: Middleware = createLogger({
 		level: 'info',
 		collapsed: true,
 	})
@@ -43,7 +44,7 @@ const composedMiddlewares = compose(
 	...enhancers
 );
 
-const store = createStore(
+const store = createStore<IStoreState, any, any, any>(
   reducers,
 	initialState,
 	composedMiddlewares

@@ -1,12 +1,16 @@
 import React from "react";
+//import { Dispatch } from "redux";
 import { connect } from "react-redux";
 import { withRouter, RouteComponentProps } from "react-router-dom";
+//import { routerActions } from 'react-router-redux';
+
 import Routes from "./Routes";
 import Header from "../components/header/Header";
 import IStoreState from "./IStoreState";
 
 interface IAppProps extends RouteComponentProps<any> {
   isAuthenticated: boolean;
+  //dispatch: Dispatch<IStoreState>
 }
 
 class App extends React.Component<IAppProps> {
@@ -24,6 +28,15 @@ class App extends React.Component<IAppProps> {
   }
 
   public render() {
+    /*
+		const {dispatch, location} = this.props;
+		const phoenixAuthToken = localStorage.getItem('phoenixAuthToken');
+
+		if (!phoenixAuthToken && location.pathname !== '/sign_in'){
+			dispatch(routerActions.push('/sign_in'));
+		}
+    return (phoenixAuthToken == null);
+    */
     return (
 			<React.Fragment>
         {this._renderHeader()}

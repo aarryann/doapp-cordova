@@ -1,11 +1,18 @@
 export default interface IStoreState {
-  session: ISessionState,
+  readonly session?: ISessionState;
+  readonly registration?: IRegistrationState;
 };
 
 export interface ISessionState {
-  isAuthenticated: boolean,
-  currentUser: string,
-  socket: any,
-  channel: any,
-  error: any,
+  readonly type?: string;
+  readonly isAuthenticated?: boolean;
+  readonly currentUser?: any;
+  readonly socket?: any;
+  readonly channel?: any;
+  readonly error?: any;
+};
+
+export interface IRegistrationState {
+  readonly type?: string;
+  readonly errors?: any;
 };

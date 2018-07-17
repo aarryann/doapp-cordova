@@ -1,6 +1,7 @@
-import Constants from './constants.session';
+import SessionConstants from './constants.session';
+import { ISessionState } from '../../app/IStoreState';
 
-const initialState = {
+const initialState: ISessionState = {
   isAuthenticated: false,
   currentUser: null,
   socket: null,
@@ -8,15 +9,15 @@ const initialState = {
   error: null,
 };
 
-export default function reducer(state = initialState, action = {}) {
+export default function reducer(state: ISessionState = initialState, action: ISessionState = {}) {
   switch (action.type) {
-    case Constants.CURRENT_USER:
+    case SessionConstants.CURRENT_USER:
       return { ...state, isAuthenticated: true, currentUser: action.currentUser, socket: action.socket, channel: action.channel, error: null };
 
-    case Constants.USER_SIGNED_OUT:
+    case SessionConstants.USER_SIGNED_OUT:
       return initialState;
 
-    case Constants.SESSIONS_ERROR:
+    case SessionConstants.SESSIONS_ERROR:
       return { ...state, error: action.error };
 
     default:

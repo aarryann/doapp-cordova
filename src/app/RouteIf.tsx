@@ -7,19 +7,15 @@ import {
 } from "react-router-dom";
 
 interface IAuthenticatedRouteProps extends RouteProps {
-  readonly isAuthenticated: boolean;
-  readonly exact: boolean;
-  readonly authenticatePath: string;
-  readonly path: string;
+  readonly condition: boolean;
+  readonly elsePath: string;
   readonly component: React.ComponentClass<any> | React.StatelessComponent<any>;
 }
 
-export default function AuthenticatedRoute({
+export default function RouteIf({
   component,
-  exact,
-  authenticatePath,
-  path,
-  isAuthenticated,
+  elsePath,
+  condition,
   ...rest
 }: IAuthenticatedRouteProps) {
   const Component = component;
@@ -28,13 +24,13 @@ export default function AuthenticatedRoute({
     let element = (
       <Redirect
         to={{
-          pathname: authenticatePath,
+          pathname: elsePath,
           state: { from: renderProps.location }
         }}
       />
     );
 
-    if (isAuthenticated) {
+    if (condition) {
       element = <Component {...renderProps} />;
     }
 

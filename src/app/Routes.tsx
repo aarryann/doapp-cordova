@@ -1,20 +1,21 @@
 import React from 'react';
-import { Route, Switch, withRouter, RouteComponentProps } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
-import AuthenticatedRoute from './AuthenticatedRoute';
+import RouteIf from './RouteIf';
 import SignIn from '../scenes/Session';
 //import Boards from '../scenes/Board';
-//import Dash from '../components/dash/Dash';
-import Home from '../components/dash/Home';
+//import Home from '../components/dash/Home';
+import Dash from '../components/dash/Dash';
 
-interface IRouteProps {
+interface IRoutesProps {
   isAuthenticated: boolean;
 }
-export default function Routes(props: IRouteProps){
+export default function Routes(props: IRoutesProps){
+	let signInPath = "/sign_in";
 	return(
 		<Switch>
-			<Route exact path="/sign_in" component={SignIn} />
-			<AuthenticatedRoute exact path="/" component={Home} />
+			<Route exact path={signInPath} component={SignIn} />
+			<RouteIf exact path="/" component={Dash} condition={props.isAuthenticated} elsePath={signInPath} />
 		</Switch>
 	);
 }
