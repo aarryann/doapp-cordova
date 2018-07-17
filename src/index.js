@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { createStore, applyMiddleware, compose, Middleware } 	from 'redux'
+import { createStore, applyMiddleware, compose } 	from 'redux'
 import { Provider } from 'react-redux'
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
@@ -16,17 +16,16 @@ import { waitForDeviceReady }	from './services/utils';
 import { loadDB }	from './services/utils/mobile.db.utils';
 
 import './assets/css/index.css';
-import IStoreState from './app/IStoreState';
 
 const history = createHistory()
-const initialState: IStoreState = {};
+const initialState = {};
 const enhancers = [];
-const middlewares: Middleware[] = [
+const middlewares = [
 	thunkMiddleware,
 ];
 
 if (process.env.NODE_ENV !== 'development'){
-	const loggerMiddleware: Middleware = createLogger({
+	const loggerMiddleware = createLogger({
 		level: 'info',
 		collapsed: true,
 	})
@@ -44,11 +43,11 @@ const composedMiddlewares = compose(
 	...enhancers
 );
 
-const store = createStore<IStoreState, any, any, any>(
+const store = createStore(
   reducers,
 	initialState,
 	composedMiddlewares
-)
+);
 
 const startApp = () => {
 	ReactDOM.render(
@@ -62,13 +61,13 @@ const startApp = () => {
 	);
 }
 
-const startMobileApp = async (dbName: string) => {
+const startMobileApp = async (dbName) => {
   await waitForDeviceReady();
   loadDB(dbName);
   startApp();
 }
 
-if (window['cordova']){
+if (window.cordova){
   startMobileApp('doapp.db');
 } else {
   startApp();

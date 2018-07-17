@@ -1,20 +1,12 @@
 import React from 'react';
-import {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import {routerActions} from 'react-router-redux';
-import { RouteComponentProps, withRouter, Route } from 'react-router-dom';
+import { withRouter, Route } from 'react-router-dom';
 
 import Actions from '../pipes/sessions/actions.session';
-import IStoreState from './IStoreState';
 
-interface IAuthProps extends RouteComponentProps<any> {
-	dispatch: Dispatch,
-	currentUser: string,
-	location: any
-}
-
-class AuthenticatedRoute extends React.Component<IAuthProps>{
-	constructor(props: IAuthProps) {
+class AuthenticatedRoute extends React.Component{
+	constructor(props) {
 		super(props);
 	}	
 
@@ -22,23 +14,23 @@ class AuthenticatedRoute extends React.Component<IAuthProps>{
 		this._checkAuth(this.props);
 	}
 
-	shouldComponentUpdate(nextProps: IAuthProps, nextState: IStoreState){
+	shouldComponentUpdate(nextProps, nextState){
 		const update = !this._signIn(nextProps);
 		return update;
 	}
 
-	_checkAuth(params: IAuthProps){
+	_checkAuth(params){
 		if (!this._signIn(params)){
 			const {dispatch, currentUser} = params;
 			if (!currentUser){
 			  // If user refreshes browser or revisits signin without logging out
 			  // ... the current user will need to be regenerated to put currentUser in store
-				dispatch<any>(Actions.currentUser());
+				dispatch>(Actions.currentUser());
 			}
 		}
 	}
 
-	_signIn(params: IAuthProps){
+	_signIn(params){
 		const {dispatch, location} = params;
 		const phoenixAuthToken = localStorage.getItem('phoenixAuthToken');
 
@@ -59,8 +51,8 @@ class AuthenticatedRoute extends React.Component<IAuthProps>{
 	}
 }
 
-const mapStateToProps = (state: IStoreState) => ({
+const mapStateToProps = (state) => ({
 	currentUser: state.session.currentUser,
 });
 
-export default withRouter(connect<{}, {}, IAuthProps, IStoreState>(mapStateToProps)(AuthenticatedRoute)) as React.ComponentClass<any> ;
+export default withRouter(connect(mapStateToProps)(AuthenticatedRoute)) ;

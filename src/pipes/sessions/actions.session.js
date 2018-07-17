@@ -1,14 +1,12 @@
 import { routerActions }                  from 'react-router-redux';
 import { Socket }                         from 'phoenix';
-import {Dispatch} from 'redux';
 
-import { apiCall, IApiPayload }                        from '../../services/utils/apicall.utils';
+import { apiCall }                        from '../../services/utils/apicall.utils';
 
 import SessionConstants                   from './constants.session';
 import AppConstants                       from '../app/constants.app';
 import BoardConstants                     from '../boards/constants.board';
 import schema                             from './schema.session';
-import IStoreState from '../../app/IStoreState';
 
 const Actions = {
   setCurrentUser: (dispatch, user) => {
@@ -21,7 +19,7 @@ const Actions = {
 
     // Add socket to global variable, to be controlled through online / offline event listener
     if(window.cordova){
-      window['SDATA'].socket = socket;
+      window.SDATA.socket = socket;
     }
     socket.connect();
 
@@ -47,8 +45,8 @@ const Actions = {
   },
 
   // On signin click
-  signIn: (email: string, password: string) => {
-    return (dispatch: Dispatch) => {
+  signIn: (email, password) => {
+    return (dispatch) => {
       // graphql query for local authentication
       const query = `query LocalAuthentication ($email: String!, $password: String!) { 
                         localAuth(email: $email, password: $password) { 
@@ -59,7 +57,7 @@ const Actions = {
                             password 
                     } } }`;
       // values for user auth
-      const payload: IApiPayload = {
+      const payload = {
         schema: schema,
         query: query,
         values: {
@@ -74,16 +72,22 @@ const Actions = {
       .then(async (data) => {
         try{
           //console.log( JSON.stringify(data, null, " ") );
-          if(window['cordova']){
+          if(window.cordova){
             if(!data.data && !data.data.localAuth){
               throw Error ("signIn local Error");
             }
             data = data.data.localAuth;
             //Cordova mode
             // Add event listeners to connect or disconnect socket as app becomes online / offline
-          	document.addEventListener("offline", () => { console.log('++++++++++OFFLINE AGAIN++++++++++'); Actions.endRemoteSync(); }, false);
-          	document.addEventListener("online", () => { console.log('++++++++++ONLINE AGAIN++++++++++'); Actions.startRemoteSync(dispatch, payload); }, false);
-            if(window['navigator']['connection']['type'] !== window['Connection']['NONE']){
+          	document.addEventListener("offline", () => { 
+              console.log('++++++++++OFFLINE AGAIN++++++++++'); 
+              Actions.endRemoteSync(); 
+            }, false);
+          	document.addEventListener("online", () => { 
+              console.log('++++++++++ONLINE AGAIN++++++++++'); 
+              Actions.startRemoteSync(dispatch, payload); 
+            }, false);
+            if(window.navigator.connection.type !== window.Connection.NONE){
               // If online, setup authtoken and socket connection right away.
               // If offline, event listener will add these when online
           	  Actions.startRemoteSync(dispatch, payload);

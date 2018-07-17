@@ -8,13 +8,8 @@ import Routes from "./Routes";
 import Header from "../components/header/Header";
 import IStoreState from "./IStoreState";
 
-interface IAppProps extends RouteComponentProps<any> {
-  isAuthenticated: boolean;
-  //dispatch: Dispatch<IStoreState>
-}
-
-class App extends React.Component<IAppProps> {
-  constructor(props: IAppProps) {
+class App extends React.Component {
+  constructor( props ) {
     super(props);
   }
 
@@ -27,7 +22,7 @@ class App extends React.Component<IAppProps> {
     );
   }
 
-  public render() {
+  render() {
     /*
 		const {dispatch, location} = this.props;
 		const phoenixAuthToken = localStorage.getItem('phoenixAuthToken');
@@ -49,7 +44,7 @@ class App extends React.Component<IAppProps> {
 
 }
 
-function mapStateToProps(state: IStoreState) {
+function mapStateToProps(state) {
   return {
     isAuthenticated: state.session.isAuthenticated,
   };
@@ -57,5 +52,5 @@ function mapStateToProps(state: IStoreState) {
 
 // Casting to prevent error where used in index.ts that isBusy is mandatory, since it is being provided by Redux.
 export default withRouter(
-  connect<{}, {}, IAppProps, IStoreState>(mapStateToProps)(App)
-) as React.ComponentClass<any>;
+  connect(mapStateToProps)(App)
+);

@@ -7,10 +7,7 @@ import SignIn from '../scenes/Session';
 //import Home from '../components/dash/Home';
 import Dash from '../components/dash/Dash';
 
-interface IRoutesProps {
-  isAuthenticated: boolean;
-}
-export default function Routes(props: IRoutesProps){
+export default function Routes(props){
 	let signInPath = "/sign_in";
 	return(
 		<Switch>
