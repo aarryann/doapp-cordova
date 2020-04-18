@@ -1,19 +1,21 @@
-import React 																			from 'react';
-import ReactDOM 																	from 'react-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 import { createStore, applyMiddleware, compose } 	from 'redux'
-import { Provider } 															from 'react-redux'
-import thunkMiddleware 														from 'redux-thunk';
-import { createLogger } 													from 'redux-logger';
-import { ConnectedRouter, routerMiddleware } 			from 'react-router-redux'
-//import createHistory 															from 'history/createBrowserHistory'
-import createHistory 															from 'history/createHashHistory'
+import { Provider } from 'react-redux'
+import thunkMiddleware from 'redux-thunk';
+import { createLogger } from 'redux-logger';
+import { ConnectedRouter, routerMiddleware } from 'react-router-redux'
+import createHistory from 'history/createBrowserHistory'
+//import createHistory from 'history/createHashHistory'
 
-import reducers 																	from '../pipes/reducers'
-import Routes 																		from '../components/Routes';
-import registerServiceWorker 											from './registerServiceWorker';
-import { waitForDeviceReady }											from '../services/utils';
-import { loadDB }																	from '../services/utils/mobile.db.utils';
+import reducers from './pipes/reducers'
+import App from './app/App';
+import registerServiceWorker from './registerServiceWorker';
+import { waitForDeviceReady }	from './services/utils';
+import { loadDB }	from './services/utils/mobile.db.utils';
+
+import './assets/css/index.css';
 
 const history = createHistory()
 const initialState = {};
@@ -29,7 +31,7 @@ if (process.env.NODE_ENV !== 'development'){
 	})
 
 	middlewares.push(loggerMiddleware);
-	const devToolsExtension = window.devToolsExtension;
+	const devToolsExtension = window['devToolsExtension'];
 
 	if (typeof devToolsExtension === 'function'){
 		enhancers.push(devToolsExtension());
@@ -45,14 +47,14 @@ const store = createStore(
   reducers,
 	initialState,
 	composedMiddlewares
-)
+);
 
 const startApp = () => {
 	ReactDOM.render(
 	  <Provider store={store}>
 	    { /* ConnectedRouter will use the store from Provider automatically */ }
 	    <ConnectedRouter history={history}>
-	  		<Routes />
+	  		<App />
 	    </ConnectedRouter>
 	  </Provider>,
 	  document.getElementById('main_container')
@@ -61,13 +63,12 @@ const startApp = () => {
 
 const startMobileApp = async (dbName) => {
   await waitForDeviceReady();
-//  await refreshDB('doapp.db');
-  loadDB('doapp.db');
+  loadDB(dbName);
   startApp();
 }
 
 if (window.cordova){
-  startMobileApp();
+  startMobileApp('doapp.db');
 } else {
   startApp();
 	registerServiceWorker();

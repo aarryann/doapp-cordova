@@ -1,9 +1,5 @@
 import Constants from '../app/constants.app';
 
-const initialState = {
-	errors: null,
-};
-
 export default function reducer(state = initialState, action = {}){
 	switch (action.type) {
 		case Constants.REGISTRATIONS_ERROR:

@@ -1,11 +1,15 @@
-import React 									from 'react';
-import {connect} 							from 'react-redux';
-import {routerActions} 				from 'react-router-redux';
-import { withRouter, Route } 	from 'react-router-dom';
+import React from 'react';
+import {connect} from 'react-redux';
+import {routerActions} from 'react-router-redux';
+import { withRouter, Route } from 'react-router-dom';
 
-import Actions 								from '../pipes/sessions/actions.session';
+import Actions from '../pipes/sessions/actions.session';
 
 class AuthenticatedRoute extends React.Component{
+	constructor(props) {
+		super(props);
+	}	
+
 	componentWillMount(){
 		this._checkAuth(this.props);
 	}
@@ -21,7 +25,7 @@ class AuthenticatedRoute extends React.Component{
 			if (!currentUser){
 			  // If user refreshes browser or revisits signin without logging out
 			  // ... the current user will need to be regenerated to put currentUser in store
-				dispatch(Actions.currentUser());
+				dispatch>(Actions.currentUser());
 			}
 		}
 	}
@@ -51,4 +55,4 @@ const mapStateToProps = (state) => ({
 	currentUser: state.session.currentUser,
 });
 
-export default withRouter(connect(mapStateToProps)(AuthenticatedRoute));
+export default withRouter(connect(mapStateToProps)(AuthenticatedRoute)) ;

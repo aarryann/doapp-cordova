@@ -7,12 +7,11 @@ import SessionConstants                   from './constants.session';
 import AppConstants                       from '../app/constants.app';
 import BoardConstants                     from '../boards/constants.board';
 import schema                             from './schema.session';
-//import { httpGet, httpPost, httpDelete }  from '../../services/utils';
 
 const Actions = {
   setCurrentUser: (dispatch, user) => {
-    const socket = new Socket('ws://10.0.2.2:4000/socket', {
-    //const socket = new Socket('ws://localhost:4000/socket', {
+    //const socket = new Socket('ws://10.0.2.2:4000/socket', {
+    const socket = new Socket('ws://localhost:4000/socket', {
         params: { token: localStorage.getItem('phoenixAuthToken') },
       logger: (kind, msg, data) => { console.log(`${kind}: ${msg}`, data);
       },
@@ -47,9 +46,16 @@ const Actions = {
 
   // On signin click
   signIn: (email, password) => {
-    return dispatch => {
+    return (dispatch) => {
       // graphql query for local authentication
-      const query = 'query LocalAuthentication ($email: String!, $password: String!) { localAuth(email: $email, password: $password) { jwt user { id email password } } }';
+      const query = `query LocalAuthentication ($email: String!, $password: String!) { 
+                        localAuth(email: $email, password: $password) { 
+                          jwt 
+                          user { 
+                            id 
+                            email 
+                            password 
+                    } } }`;
       // values for user auth
       const payload = {
         schema: schema,
@@ -58,6 +64,7 @@ const Actions = {
           email: email,
           password: password,
         },
+        db: null,
       };
       // Local auth in cordova mode, or remote call in web mode
       const response = apiCall('api/v1/sessions', payload, window.cordova?"local":"post");
@@ -72,8 +79,14 @@ const Actions = {
             data = data.data.localAuth;
             //Cordova mode
             // Add event listeners to connect or disconnect socket as app becomes online / offline
-          	document.addEventListener("offline", () => { console.log('++++++++++OFFLINE AGAIN++++++++++'); Actions.endRemoteSync(); }, false);
-          	document.addEventListener("online", () => { console.log('++++++++++ONLINE AGAIN++++++++++'); Actions.startRemoteSync(dispatch, payload); }, false);
+          	document.addEventListener("offline", () => { 
+              console.log('++++++++++OFFLINE AGAIN++++++++++'); 
+              Actions.endRemoteSync(); 
+            }, false);
+          	document.addEventListener("online", () => { 
+              console.log('++++++++++ONLINE AGAIN++++++++++'); 
+              Actions.startRemoteSync(dispatch, payload); 
+            }, false);
             if(window.navigator.connection.type !== window.Connection.NONE){
               // If online, setup authtoken and socket connection right away.
               // If offline, event listener will add these when online
@@ -156,8 +169,7 @@ const Actions = {
   // ... the current user will need to be regenerated to put currentUser in store
   currentUser: () => {
     return dispatch => {
-      /*
-      httpGet('/api/v1/current_user')
+      apiCall('api/v1/current_user', null, 'get')
       .then(function (data) {
           dispatch({
             type: SessionConstants.CURRENT_USER,
@@ -169,7 +181,6 @@ const Actions = {
         console.log(error);
         dispatch(routerActions.push('/'));
       });
-      */
     };
   },
 
